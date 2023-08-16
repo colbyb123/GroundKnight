@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Magenta Storm.mp3-094931640e1c6160199238727f7eb16b.mp3str"
+
+[deps]
+
+source_file="res://resources/sounds/Magenta Storm.mp3"
+dest_files=[ "res://.import/Magenta Storm.mp3-094931640e1c6160199238727f7eb16b.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

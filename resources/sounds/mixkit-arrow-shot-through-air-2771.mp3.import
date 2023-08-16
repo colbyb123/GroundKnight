@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/mixkit-arrow-shot-through-air-2771.mp3-004e963b407777a47474ef3b1ab841fd.mp3str"
+
+[deps]
+
+source_file="res://resources/sounds/mixkit-arrow-shot-through-air-2771.mp3"
+dest_files=[ "res://.import/mixkit-arrow-shot-through-air-2771.mp3-004e963b407777a47474ef3b1ab841fd.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Fluffing-a-Duck.mp3-8e7ea55331dd731ef3de75726343685e.mp3str"
+
+[deps]
+
+source_file="res://resources/sounds/Fluffing-a-Duck.mp3"
+dest_files=[ "res://.import/Fluffing-a-Duck.mp3-8e7ea55331dd731ef3de75726343685e.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

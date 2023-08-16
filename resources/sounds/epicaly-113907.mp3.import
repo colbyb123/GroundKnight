@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/epicaly-113907.mp3-cb3bc859bcb20b959c0f1b850b82dc39.mp3str"
+
+[deps]
+
+source_file="res://resources/sounds/epicaly-113907.mp3"
+dest_files=[ "res://.import/epicaly-113907.mp3-cb3bc859bcb20b959c0f1b850b82dc39.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

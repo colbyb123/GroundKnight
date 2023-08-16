@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/SillyVillain-320bit.mp3-a2384d72187ef85552111a8d4d84f2de.mp3str"
+
+[deps]
+
+source_file="res://resources/sounds/SillyVillain-320bit.mp3"
+dest_files=[ "res://.import/SillyVillain-320bit.mp3-a2384d72187ef85552111a8d4d84f2de.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

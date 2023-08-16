@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/mixkit-big-fire-spell-burning-1332-[AudioTrimmer.com].mp3-c1c06bccb66fc7e9af15498e5425d507.mp3str"
+
+[deps]
+
+source_file="res://resources/sounds/mixkit-big-fire-spell-burning-1332-[AudioTrimmer.com].mp3"
+dest_files=[ "res://.import/mixkit-big-fire-spell-burning-1332-[AudioTrimmer.com].mp3-c1c06bccb66fc7e9af15498e5425d507.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

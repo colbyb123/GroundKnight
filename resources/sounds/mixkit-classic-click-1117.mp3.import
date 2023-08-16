@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/mixkit-classic-click-1117.mp3-822036250ae6bd79ba2e45d6cb2cec32.mp3str"
+
+[deps]
+
+source_file="res://resources/sounds/mixkit-classic-click-1117.mp3"
+dest_files=[ "res://.import/mixkit-classic-click-1117.mp3-822036250ae6bd79ba2e45d6cb2cec32.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
