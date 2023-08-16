@@ -1,0 +1,110 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://resources/images/apple_kid.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://resources/images/0.png" type="Texture" id=2]
+[ext_resource path="res://resources/menus/TitleScreen.gd" type="Script" id=3]
+[ext_resource path="res://resources/sounds/mixkit-classic-click-1117.mp3" type="AudioStream" id=4]
+[ext_resource path="res://resources/sounds/Cinematic-Epicness.mp3" type="AudioStream" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 128
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 84
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "fade"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="DynamicFont" id=5]
+size = 36
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 3 )
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Label" type="Label" parent="."]
+margin_top = 70.0
+margin_right = 1024.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 1024, 600 )
+custom_fonts/font = SubResource( 1 )
+text = "Ground Knight"
+align = 1
+
+[node name="Button" type="Button" parent="."]
+margin_left = 384.0
+margin_top = 280.0
+margin_right = 640.0
+margin_bottom = 356.0
+custom_fonts/font = SubResource( 2 )
+text = "Play"
+icon_align = 1
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 3 )
+anims/fade = SubResource( 4 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+autoplay = true
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 383.0
+margin_top = 529.0
+margin_right = 1407.0
+margin_bottom = 1129.0
+rect_min_size = Vector2( 1024, 600 )
+custom_fonts/font = SubResource( 5 )
+text = "Turn on your sound!"
+align = 1
+
+[connection signal="button_down" from="Button" to="." method="_on_Button_button_down"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

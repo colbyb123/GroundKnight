@@ -1,0 +1,96 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://resources/entity/EntityBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Dungeon Crawler Pack/enemies/flying creature/fly_anim_spritesheet.png" type="Texture" id=2]
+[ext_resource path="res://resources/entity/enemy/Fly.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 16, 16 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 31.6667, 29.1667 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 31.6667, 29.1667 )
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 308.351
+
+[sub_resource type="Animation" id=6]
+resource_name = "flying"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[node name="Fly" instance=ExtResource( 1 )]
+scale = Vector2( 0.6, 0.6 )
+collision_layer = 4
+collision_mask = 7
+script = ExtResource( 3 )
+knockback_modifier = 1.0
+EFFECT_HIT = null
+EFFECT_DIED = null
+
+[node name="Sprite" parent="." index="0"]
+position = Vector2( 0, -5 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 2 )
+hframes = 4
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2( 0, -5 )
+shape = SubResource( 2 )
+
+[node name="Hurtbox" parent="." index="2"]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2( -1.58946e-06, -5.83333 )
+shape = SubResource( 3 )
+
+[node name="EntityHealthbar" parent="." index="3"]
+margin_left = -11.1111
+margin_top = -30.0
+margin_right = 28.8889
+margin_bottom = 10.0
+
+[node name="Hitbox" parent="." index="4"]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2( -1.58946e-06, -5.83333 )
+shape = SubResource( 4 )
+
+[node name="Area2D" type="Area2D" parent="." index="5"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2( 0, -5 )
+shape = SubResource( 5 )
+
+[node name="RoamTimer" type="Timer" parent="." index="6"]
+wait_time = 1.5
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
+autoplay = "flying"
+anims/flying = SubResource( 6 )
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="timeout" from="RoamTimer" to="." method="_on_RoamTimer_timeout"]
+
+[editable path="Hurtbox"]
+[editable path="Hitbox"]

@@ -1,0 +1,167 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://resources/entity/EntityBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://resources/images/bO+TTu.png" type="Texture" id=2]
+[ext_resource path="res://resources/entity/enemy/Boss.gd" type="Script" id=3]
+[ext_resource path="res://resources/projectiles/EnemyArrow.tscn" type="PackedScene" id=4]
+[ext_resource path="res://resources/overlap/Hitbox.tscn" type="PackedScene" id=5]
+[ext_resource path="res://resources/sounds/mixkit-big-fire-spell-burning-1332-[AudioTrimmer.com].mp3" type="AudioStream" id=6]
+[ext_resource path="res://resources/images/Idle.png" type="Texture" id=7]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 25.6667, 58.5 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 28.3333, 41.6667 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 28.3333, 41.6667 )
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 2 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "flying"
+length = 0.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 7 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "shooting"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
+
+[node name="Boss" instance=ExtResource( 1 )]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource( 3 )
+defense = 35
+receives_knockback = false
+EFFECT_HIT = null
+EFFECT_DIED = null
+DAGGER = ExtResource( 4 )
+
+[node name="Sprite" parent="." index="0"]
+position = Vector2( -5, 1.66667 )
+scale = Vector2( -1.5, 1.5 )
+texture = ExtResource( 2 )
+hframes = 8
+frame = 1
+
+[node name="Hitbox" parent="Sprite" index="0" instance=ExtResource( 5 )]
+position = Vector2( -3.33333, -1.11111 )
+rotation = 3.14159
+scale = Vector2( 0.666667, -0.666667 )
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="Sprite/Hitbox" index="0"]
+position = Vector2( -51.3333, 2 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource( 2 )
+
+[node name="Hurtbox" parent="." index="2"]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource( 3 )
+
+[node name="EntityHealthbar" parent="." index="3"]
+margin_left = -11.1111
+margin_top = -30.0
+margin_right = 28.8889
+margin_bottom = 10.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+autoplay = "flying"
+anims/RESET = SubResource( 7 )
+anims/flying = SubResource( 6 )
+anims/shooting = SubResource( 8 )
+
+[node name="Timer" type="Timer" parent="." index="6"]
+wait_time = 1.5
+one_shot = true
+autostart = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="7"]
+stream = ExtResource( 6 )
+volume_db = -5.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_AudioStreamPlayer_finished"]
+
+[editable path="Sprite/Hitbox"]
+[editable path="Hurtbox"]

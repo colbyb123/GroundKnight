@@ -1,0 +1,282 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://resources/entity/EntityBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://resources/entity/player/Player.gd" type="Script" id=2]
+[ext_resource path="res://resources/overlap/Hitbox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Dungeon Crawler Pack/heroes/knight/knight_run_spritesheet.png" type="Texture" id=4]
+[ext_resource path="res://resources/projectiles/PlayerDagger.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Dungeon Crawler Pack/heroes/knight/knight_idle_spritesheet.png" type="Texture" id=6]
+[ext_resource path="res://resources/entity/player/Camera2D.gd" type="Script" id=7]
+[ext_resource path="res://resources/sounds/mixkit-arrow-shot-through-air-2771.mp3" type="AudioStream" id=8]
+[ext_resource path="res://resources/images/output-onlinegiftools.png" type="Texture" id=9]
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 0, 450, 450 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 9 )
+region = Rect2( 450, 0, 450, 450 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 9 )
+region = Rect2( 900, 0, 450, 450 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 9 )
+region = Rect2( 1350, 0, 450, 450 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 9 )
+region = Rect2( 1800, 0, 450, 450 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 9 )
+region = Rect2( 2250, 0, 450, 450 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 9 )
+region = Rect2( 2700, 0, 450, 450 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 0, 450, 450 )
+
+[sub_resource type="SpriteFrames" id=20]
+animations = [ {
+"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
+"loop": false,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 21 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 24.4201, 30.96 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 12.5, 15.5 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 14.5, 17.5 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="Animation" id=11]
+length = 0.001
+
+[sub_resource type="Animation" id=9]
+resource_name = "idle"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 6 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "run"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "swing"
+length = 0.5
+loop = true
+
+[node name="Player" instance=ExtResource( 1 )]
+collision_layer = 2
+script = ExtResource( 2 )
+defense = 5
+knockback_modifier = 3.0
+DAGGER = ExtResource( 5 )
+max_speed = 350
+gravity = 45.0
+jump_force = 750
+acceleration = 50
+
+[node name="Camera2D" type="Camera2D" parent="." index="0"]
+current = true
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+drag_margin_left = 0.1
+drag_margin_top = 0.75
+drag_margin_right = 0.1
+script = ExtResource( 7 )
+
+[node name="ShiftTween" type="Tween" parent="Camera2D" index="0"]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="1"]
+position = Vector2( 24, 2 )
+rotation = 1.5708
+scale = Vector2( 0.14, 0.14 )
+frames = SubResource( 20 )
+animation = "idle"
+speed_scale = 5.0
+playing = true
+
+[node name="Sprite" parent="." index="2"]
+scale = Vector2( 2.5, 2.5 )
+texture = ExtResource( 6 )
+hframes = 6
+
+[node name="Hitbox" parent="Sprite" index="0" instance=ExtResource( 3 )]
+position = Vector2( 8.8, 0 )
+scale = Vector2( 1.11111, 1.11111 )
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="Sprite/Hitbox" index="0"]
+position = Vector2( 1.45499, 0.900001 )
+scale = Vector2( 0.25, 0.25 )
+shape = SubResource( 6 )
+disabled = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="Sprite" index="1"]
+visible = false
+margin_left = 4.0
+margin_top = -8.0
+margin_right = 17.0
+margin_bottom = 10.0
+color = Color( 1, 0, 0, 0.262745 )
+
+[node name="CollisionShape2D" parent="." index="3"]
+position = Vector2( 1.5, 1.5 )
+shape = SubResource( 4 )
+
+[node name="Hurtbox" parent="." index="4"]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2( 1.5, 1.5 )
+shape = SubResource( 5 )
+
+[node name="EntityHealthbar" parent="." index="5"]
+visible = true
+margin_left = -10.0
+margin_top = -27.0
+margin_right = 30.0
+margin_bottom = 13.0
+
+[node name="AttackTimer1" type="Timer" parent="." index="6"]
+wait_time = 0.15
+one_shot = true
+
+[node name="AttackLength1" type="Timer" parent="." index="7"]
+wait_time = 0.1
+one_shot = true
+
+[node name="AttackTimer2" type="Timer" parent="." index="8"]
+wait_time = 0.5
+one_shot = true
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+disabled = true
+
+[node name="Dash_Timer" type="Timer" parent="." index="10"]
+wait_time = 0.1
+one_shot = true
+
+[node name="Dash_Cooldown" type="Timer" parent="." index="11"]
+wait_time = 1.5
+one_shot = true
+
+[node name="ProgressBar" type="ProgressBar" parent="." index="12"]
+visible = false
+margin_left = -10.0
+margin_top = 22.0
+margin_right = 10.0
+margin_bottom = 24.0
+custom_styles/fg = SubResource( 7 )
+custom_styles/bg = SubResource( 8 )
+max_value = 0.15
+percent_visible = false
+
+[node name="ProgressBar2" type="ProgressBar" parent="." index="13"]
+visible = false
+margin_left = -10.0
+margin_top = 18.0
+margin_right = 10.0
+margin_bottom = 20.0
+custom_styles/fg = SubResource( 7 )
+custom_styles/bg = SubResource( 8 )
+max_value = 1.5
+percent_visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="14"]
+autoplay = "idle"
+anims/RESET = SubResource( 11 )
+anims/idle = SubResource( 9 )
+anims/run = SubResource( 10 )
+anims/swing = SubResource( 12 )
+
+[node name="InvinTimer" parent="." index="15"]
+wait_time = 0.4
+
+[node name="DaggerSound" type="AudioStreamPlayer" parent="." index="16"]
+stream = ExtResource( 8 )
+
+[connection signal="grounded_update" from="." to="Camera2D" method="_on_Player_grounded_update"]
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+[connection signal="timeout" from="AttackLength1" to="." method="_on_AttackLength1_timeout"]
+[connection signal="timeout" from="Dash_Timer" to="." method="_on_Dash_Timer_timeout"]
+[connection signal="timeout" from="Dash_Cooldown" to="." method="_on_Dash_Cooldown_timeout"]
+
+[editable path="Sprite/Hitbox"]
+[editable path="Hurtbox"]
+[editable path="Hitbox"]
